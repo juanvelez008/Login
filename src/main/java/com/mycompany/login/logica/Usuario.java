@@ -3,27 +3,45 @@ package com.mycompany.login.logica;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Usuario implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    //@GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id;
     private String nombreUsuario;
     private String contrasena;
+    @ManyToOne
+    @JoinColumn(name="fk_rol")
+    private Rol unRol;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombreUsuario, String contrasena) {
+    public Usuario(int id, String nombreUsuario, String contrasena, Rol unRol) {
         this.id = id;
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
+        this.unRol = unRol;
     }
+
+    
+
+    public Rol getUnRol() {
+        return unRol;
+    }
+
+    public void setUnRol(Rol unRol) {
+        this.unRol = unRol;
+    }
+
+    
 
     public int getId() {
         return id;
